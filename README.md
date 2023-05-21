@@ -62,3 +62,35 @@ Display the expected future value and the total interest to be earned during the
 ```
 System.out.println("If you deposit $" + depositAmount + " in a CD that earns " + interestRate + "% interest " + "and " + "matures in " + numOfYears + " years, your CD's ending balance will be " + String.format("$%.2f", compoundInterest) + " and you would have earned " + String.format("$%.2f", totalInterest) + " in " + "interest.");
 ```
+### Present Value Calculator
+- The application would accept three inputs (the monthly payout, expected interest rate, and years to pay out) from the user.
+- The application would display the present value of that annuity.
+
+#### Pseudocode
+Import all the necessary utilities.
+```
+import java.util.Scanner;
+```
+
+Accept inputs from the user for the monthly payout, expected interest rate, and years to pay out.
+
+```
+Scanner scanner = new Scanner(System.in);
+System.out.println("Please enter the monthly payout, expected interest rate, and the years to pay out");
+double periodicPayout = scanner.nextFloat();
+double interestRate = scanner.nextFloat();
+double yearsToPayout = scanner.nextFloat();
+```
+
+Define variables for calculating the present value of an ordinary annuity.
+
+```
+double ratePerPeriod = (interestRate/100)/12;
+double numOfPeriods = yearsToPayout * 12;
+double presentValue = periodicPayout * ((1- Math.pow((1+ratePerPeriod), - numOfPeriods))/ ratePerPeriod);
+```
+
+Display the expected present value required to earn an expected monthly payout
+```
+System.out.println("To fund an annuity that pays $" + periodicPayout + " monthly for " + yearsToPayout + " years and earns an expected " + interestRate + "% interest, you would need to invest " + String.format("$%.2f", presentValue) + " today.");
+```
